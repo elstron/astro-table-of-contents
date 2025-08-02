@@ -1,0 +1,75 @@
+---
+const { title, backgroundColor } = Astro.props;
+---
+
+<stron-toc>
+    <h2 id="toc-title"
+        style:background-color={backgroundColor || 'transparent'}
+        >Table of Contents</h2>
+    {title || ''}</h2>
+</stron-toc>
+
+
+<style is:global>
+    stron-toc {
+        display: block;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0 , 0.1);
+        margin-bottom: 2rem;
+        color: #000;
+        max-width: max-content;
+        width: 100%;
+        h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        #toc-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+
+            &:hover {
+                cursor: pointer;
+                color: #555;
+            }
+
+            
+        }
+
+        & ul {
+            list-style: none;
+            padding: 0;
+            margin-left: 1rem;
+        }
+
+        & a {
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 700;
+            &:hover {
+                color: #777777;
+                text-decoration: underline;
+            }
+        }
+        &.collapsed {
+            max-height: 2.4rem;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+    }
+</style>
+
+<script>
+    const toc = document.querySelector('stron-toc');
+
+    const titleElement = toc?.querySelector('#toc-title');
+
+    titleElement?.addEventListener('click', (e) => {
+        e.preventDefault();
+        toc?.classList.toggle('collapsed');
+    });
+
+</script>

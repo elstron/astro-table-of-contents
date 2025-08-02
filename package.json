@@ -1,0 +1,30 @@
+{
+    "name": "table-of-contents",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index",
+    "type": "module",
+    "scripts": {
+        "test": "vitest",
+        "test:ui": "vitest --ui",
+        "test:run": "vitest run",
+        "test:watch": "vitest --watch",
+        "test:coverage": "vitest run --coverage",
+        "test:report": "vitest run --reporter=html",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "pnpm@10.12.3",
+    "dependencies": {
+        "typescript": "^5.9.2"
+    },
+    "devDependencies": {
+        "@vitest/ui": "3.2.4",
+        "astro": "^5.12.8",
+        "prettier": "3.6.2",
+        "vitest": "^3.2.4"
+    }
+}
