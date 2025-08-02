@@ -16,11 +16,11 @@ A complete integration for Astro that automatically generates table of contents 
 ## 📦 Installation
 
 ```bash
-npm install table-of-contents
+npm i astro-table-of-contents
 # or
-pnpm add table-of-contents
+pnpm add astro-table-of-contents
 # or 
-yarn add table-of-contents
+yarn astro-table-of-contents
 ```
 
 ## 🛠️ Usage
