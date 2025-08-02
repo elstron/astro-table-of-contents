@@ -1,6 +1,5 @@
 // Main exports for the TOC integration
 export { tableOfContents } from './integration/astro-integration';
-export { default as TableOfContents } from '../astro/TableOfContents.astro';
 // Template exports
 export {
     tocItemTemplate,

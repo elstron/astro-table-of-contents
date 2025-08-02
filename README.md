@@ -46,7 +46,7 @@ export default defineConfig({
 
 ```astro
 ---
-import TableOfContents from 'astro-table-of-contents';
+import TableOfContents from 'astro-table-of-contents/component';
 
 
 ---
