@@ -1,7 +1,7 @@
 {
-    "name": "table-of-contents",
+    "name": "astro-table-of-contents",
     "version": "1.0.0",
-    "description": "",
+    "description": "Toc integration for Astro projects, providing a simple way to generate and display a table of contents for your content. Supports both static and dynamic content.",
     "main": "index",
     "type": "module",
     "scripts": {
@@ -14,9 +14,17 @@
         "format": "prettier --write .",
         "format:check": "prettier --check ."
     },
-    "keywords": [],
+
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "keywords": ["astro-component", "withastro", "toc", "table-of-contents", "table of contents", "toc integration", "astro toc", "astro table of contents", "auto toc"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/elstron/astro-table-of-contents"
+    },
     "author": "",
-    "license": "ISC",
+    "license": "MPL-2.0",
     "packageManager": "pnpm@10.12.3",
     "dependencies": {
         "typescript": "^5.9.2"

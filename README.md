@@ -1,0 +1,149 @@
+# Astro Table of Contents
+
+A complete integration for Astro that automatically generates table of contents (TOC) for your web pages. This package provides an elegant and customizable solution to improve content navigation in your Astro projects.
+
+## 🚀 Features
+
+- **Automatic generation**: Automatically detects headings (`h1`, `h2`, `h3`, etc.) in your HTML content
+- **Native Astro integration**: Seamlessly integrates with Astro's integration system
+- **Astro component included**: Ready-to-use `<TableOfContents>` component
+- **Highly customizable**: Configure title, position, maximum and minimum depth
+- **Interactive interface**: Collapsible TOC with smooth animations
+- **Full TypeScript**: Fully typed for better development experience
+- **Integrated middleware**: Automatic processing during build
+- **Responsive**: Adapts to different screen sizes
+
+## 📦 Installation
+
+```bash
+npm install table-of-contents
+# or
+pnpm add table-of-contents
+# or 
+yarn add table-of-contents
+```
+
+## 🛠️ Usage
+
+### 1. Configure the integration
+
+In your `astro.config.mjs` file:
+
+```javascript
+import { defineConfig } from 'astro/config';
+import { tableOfContents } from 'table-of-contents';
+
+export default defineConfig({
+  integrations: [
+    tableOfContents({
+      title: 'Contents', // default title
+    })
+  ]
+});
+```
+
+### 2. Use the component in your pages
+
+```astro
+---
+import TableOfContents from 'astro-table-of-contents';
+
+
+---
+
+<html>
+  <head>
+    <title>My page with TOC</title>
+  </head>
+  <body>
+    <main>
+      <TableOfContents title="Index" backgroundColor="#f5f5f5" />
+      
+      <h1>Main Title</h1>
+      <p>Content...</p>
+      
+      <h2>Section 1</h2>
+      <p>More content...</p>
+      
+      <h3>Subsection 1.1</h3>
+      <p>Nested content...</p>
+    </main>
+  </body>
+</html>
+```
+
+## ⚙️ Configuration
+
+### Integration options
+
+```typescript
+interface TocConfig {
+  title?: string;           // TOC title (default: "Table of Contents")
+  position?: 'left' | 'right'; // TOC position (default: 'right')
+  collapsible?: boolean;    // Whether TOC is collapsible (default: true)
+  maxDepth?: number;        // Maximum heading depth
+  minDepth?: number;        // Minimum heading depth
+}
+```
+
+### TableOfContents component props
+
+```typescript
+interface Props {
+  title?: string;           // Custom title for this TOC
+  backgroundColor?: string; // Custom background color
+}
+```
+
+## 🔧 Advanced API
+
+### Manual TOC generation
+
+```typescript
+import { generateToc } from 'table-of-contents';
+
+const htmlContent = `
+  <h1>Title</h1>
+  <h2>Subtitle</h2>
+  <h3>Sub-subtitle</h3>
+`;
+
+const tocHtml = generateToc({ content: htmlContent });
+console.log(tocHtml);
+```
+
+### Using custom templates
+
+```typescript
+import { 
+  tocItemTemplate, 
+  tocContainerTemplate, 
+  nestedListTemplate 
+} from 'table-of-contents';
+
+// Customize HTML structure
+const customToc = tocContainerTemplate(
+  nestedListTemplate(
+    tocItemTemplate('my-id', 'My Title')
+  )
+);
+```
+
+## 📝 License
+
+This project is licensed under the ISC License. See the `LICENSE` file for details.
+
+## 🏷️ Keywords
+
+- astro-component
+- withastro
+- toc
+- table-of-contents
+- astro integration
+- navigation
+- content organization
+- typescript
+
+---
+
+Built with ❤️ for the Astro community
