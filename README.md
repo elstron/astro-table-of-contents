@@ -2,6 +2,8 @@
 
 A complete integration for Astro that automatically generates table of contents (TOC) for your web pages. This package provides an elegant and customizable solution to improve content navigation in your Astro projects.
 
+live example: [astro-toc-example](https://toc-cloudflare-test.pages.dev/)
+
 ## 🚀 Features
 
 - **Automatic generation**: Automatically detects headings (`h1`, `h2`, `h3`, etc.) in your HTML content
@@ -57,8 +59,7 @@ import TableOfContents from 'astro-table-of-contents/component';
   </head>
   <body>
     <main>
-      <TableOfContents title="Index" backgroundColor="#f5f5f5" />
-
+      <TableOfContents title="Index" backgroundColor="#f5f5f5" class="bg-red" />
       <h1>Main Title</h1>
       <p>Content...</p>
 
