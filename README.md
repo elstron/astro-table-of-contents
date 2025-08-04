@@ -31,7 +31,7 @@ In your `astro.config.mjs` file:
 
 ```javascript
 import { defineConfig } from 'astro/config';
-import { tableOfContents } from 'table-of-contents';
+import { tableOfContents } from 'astro-table-of-contents';
 
 export default defineConfig({
   integrations: [
@@ -74,18 +74,6 @@ import TableOfContents from 'astro-table-of-contents/component';
 
 ## ⚙️ Configuration
 
-### Integration options
-
-```typescript
-interface TocConfig {
-  title?: string;           // TOC title (default: "Table of Contents")
-  position?: 'left' | 'right'; // TOC position (default: 'right')
-  collapsible?: boolean;    // Whether TOC is collapsible (default: true)
-  maxDepth?: number;        // Maximum heading depth
-  minDepth?: number;        // Minimum heading depth
-}
-```
-
 ### TableOfContents component props
 
 ```typescript
@@ -119,7 +107,7 @@ import {
   tocItemTemplate, 
   tocContainerTemplate, 
   nestedListTemplate 
-} from 'table-of-contents';
+} from 'astro-table-of-contents';
 
 // Customize HTML structure
 const customToc = tocContainerTemplate(
@@ -146,4 +134,4 @@ This project is licensed under the ISC License. See the `LICENSE` file for detai
 
 ---
 
-Built with ❤️ for the Astro community
+Built with Stron ❤️ for the Astro community
