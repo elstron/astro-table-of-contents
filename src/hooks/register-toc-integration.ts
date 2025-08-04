@@ -19,7 +19,6 @@ export function registerTocIntegration() {
                 hooks: {},
             });
         }
-        console.log('config.integrations', config);
         logger.info('Registering Table of Contents integration');
         logger.info('Adding TOC...');
 
