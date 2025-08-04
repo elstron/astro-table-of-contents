@@ -2,18 +2,20 @@
 interface Props {
     title?: string;
     backgroundColor?: string;
+    class?: string;
 }
-const { title, backgroundColor } = Astro.props;
+const { title, backgroundColor, class:className, ...rest } = Astro.props;
 ---
 
-<stron-toc>
+<stron-toc class={className} {...rest}>
     <h2 id="toc-title" style={`background-color: ${backgroundColor || 'transparent'};`}>
         {title || ''}
     </h2>
 </stron-toc>
 <style>
     stron-toc {
-        display: block;
+        display: flex;
+        flex-direction: column;
         padding: 1rem;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0 , 0.1);

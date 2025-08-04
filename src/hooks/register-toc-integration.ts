@@ -8,6 +8,7 @@ export function registerTocIntegration() {
         command,
         logger,
     }: Parameters<BaseIntegrationHooks['astro:config:setup']>[0]) => {
+        if (command === 'preview') return;
         if (
             !config.integrations.some(
                 (integration) => integration.name === 'table-of-contents-by-stron',
@@ -18,23 +19,14 @@ export function registerTocIntegration() {
                 hooks: {},
             });
         }
+        console.log('config.integrations', config);
+        logger.info('Registering Table of Contents integration');
+        logger.info('Adding TOC...');
+
         
-        logger.info('Registering Table of Contents integration hooks');
-        logger.info(`Running Command: ${command}`);
-
-        if (command !== 'build') {
-            logger.info('Adding TOC middleware for non-build commands');
-            
-            const currentFile = fileURLToPath(import.meta.url);
-            const middlewarePath = path.resolve(
-                path.dirname(currentFile),
-                '../middleware/toc-middleware.ts'
-            );
-
-            addMiddleware({
-                order: 'pre',
-                entrypoint: middlewarePath,
-            });
-        }
+        addMiddleware({
+            order: 'pre',
+            entrypoint: new URL('../middleware/toc-middleware.js', import.meta.url)
+        });
     };
 }

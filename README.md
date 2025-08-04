@@ -19,7 +19,7 @@ A complete integration for Astro that automatically generates table of contents 
 npm i astro-table-of-contents
 # or
 pnpm add astro-table-of-contents
-# or 
+# or
 yarn astro-table-of-contents
 ```
 
@@ -34,11 +34,11 @@ import { defineConfig } from 'astro/config';
 import { tableOfContents } from 'astro-table-of-contents';
 
 export default defineConfig({
-  integrations: [
-    tableOfContents({
-      title: 'Contents', // default title
-    })
-  ]
+    integrations: [
+        tableOfContents({
+            title: 'Contents', // default title
+        }),
+    ],
 });
 ```
 
@@ -58,13 +58,13 @@ import TableOfContents from 'astro-table-of-contents/component';
   <body>
     <main>
       <TableOfContents title="Index" backgroundColor="#f5f5f5" />
-      
+
       <h1>Main Title</h1>
       <p>Content...</p>
-      
+
       <h2>Section 1</h2>
       <p>More content...</p>
-      
+
       <h3>Subsection 1.1</h3>
       <p>Nested content...</p>
     </main>
@@ -78,8 +78,8 @@ import TableOfContents from 'astro-table-of-contents/component';
 
 ```typescript
 interface Props {
-  title?: string;           // Custom title for this TOC
-  backgroundColor?: string; // Custom background color
+    title?: string; // Custom title for this TOC
+    backgroundColor?: string; // Custom background color
 }
 ```
 
@@ -103,18 +103,10 @@ console.log(tocHtml);
 ### Using custom templates
 
 ```typescript
-import { 
-  tocItemTemplate, 
-  tocContainerTemplate, 
-  nestedListTemplate 
-} from 'astro-table-of-contents';
+import { tocItemTemplate, tocContainerTemplate, nestedListTemplate } from 'astro-table-of-contents';
 
 // Customize HTML structure
-const customToc = tocContainerTemplate(
-  nestedListTemplate(
-    tocItemTemplate('my-id', 'My Title')
-  )
-);
+const customToc = tocContainerTemplate(nestedListTemplate(tocItemTemplate('my-id', 'My Title')));
 ```
 
 ## 📝 License
