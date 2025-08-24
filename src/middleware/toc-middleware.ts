@@ -2,11 +2,18 @@
 import type { MiddlewareHandler } from 'astro';
 import { pageContainsToc } from '../_utils';
 import { generateToc } from '../generator/toc-generator';
-import { getTocConfig } from '../config';
+import { getTocConfig, CONFIG_FILE_PATH } from '../config';
 
-export const onRequest: MiddlewareHandler = async ({ request }, next) => {
+export const onRequest: MiddlewareHandler = async ({ locals }, next) => {
     const response = await next();
     const html = await response.text();
+
+    const config = await import(
+        /* @vite-ignore */ CONFIG_FILE_PATH,
+        typeof locals === 'object' ? { assert: { type: 'json' } } : undefined
+    )
+        .then((mod) => mod.default)
+        .catch(() => getTocConfig());
 
     if (!pageContainsToc({ content: html })) await next();
 
@@ -21,7 +28,7 @@ export const onRequest: MiddlewareHandler = async ({ request }, next) => {
         (match, content) => {
             const clean = content.replace(/<[^>]*>/g, '').trim();
             return clean.length === 0
-                ? match.replace(/>[\s\S]*?<\/h2>/, `>${getTocConfig().title}</h2>`)
+                ? match.replace(/>[\s\S]*?<\/h2>/, `>${config.title}</h2>`)
                 : match;
         },
     );

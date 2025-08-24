@@ -1,6 +1,8 @@
 import type { BaseIntegrationHooks } from 'astro';
-import { fileURLToPath } from 'url';
-const path = await import('path');
+import fs from 'fs/promises';
+import { getTocConfig, CONFIG_FILE_PATH, INTEGRATION_NAME } from '../config';
+import { logMessages } from '../log-messages';
+
 export function registerTocIntegration() {
     return async ({
         config,
@@ -9,23 +11,25 @@ export function registerTocIntegration() {
         logger,
     }: Parameters<BaseIntegrationHooks['astro:config:setup']>[0]) => {
         if (command === 'preview') return;
-        if (
-            !config.integrations.some(
-                (integration) => integration.name === 'table-of-contents-by-stron',
-            )
-        ) {
+
+        logger.info(logMessages.REGISTERING_INTEGRATION);
+
+        if (!config.integrations.some((integration) => integration.name === INTEGRATION_NAME)) {
             config.integrations.push({
-                name: 'table-of-contents-by-stron',
+                name: INTEGRATION_NAME,
                 hooks: {},
             });
         }
-        logger.info('Registering Table of Contents integration');
-        logger.info('Adding TOC...');
+        logger.info(logMessages.ADDING_TOC);
 
-        
+        try {
+            await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(getTocConfig()));
+        } catch (e) {
+            logger.warn(logMessages.FAILED_WRITE_CONFIG);
+        }
         addMiddleware({
             order: 'pre',
-            entrypoint: new URL('../middleware/toc-middleware.js', import.meta.url)
+            entrypoint: new URL('../middleware/toc-middleware.js', import.meta.url),
         });
     };
 }

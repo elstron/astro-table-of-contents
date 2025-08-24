@@ -16,7 +16,7 @@ function processHeadingWithChildren(
     currentIndex: number,
     heading: HeadingData,
 ): { html: string; nextIndex: number } {
-    const openTag = `<li><a href="#${heading.id}">${heading.title}</a>`;
+    const openTag = `<li><a data-level="${currentIndex+1}" href="#${heading.id}">${heading.title}</a>`;
     const childResult = buildHierarchy(headings, currentIndex + 1, heading.level + 1);
     const closeTag = '</li>';
 
@@ -28,7 +28,7 @@ function processHeadingWithChildren(
 
 function processHeadingWithoutChildren(heading: HeadingData): { html: string; nextIndex: number } {
     return {
-        html: `<li><a href="#${heading.id}">${heading.title}</a></li>`,
+        html: `<li><a data-level="${heading.level} href="#${heading.id}">${heading.title}</a></li>`,
         nextIndex: 1,
     };
 }
