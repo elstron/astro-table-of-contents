@@ -1,6 +1,6 @@
 import type { BaseIntegrationHooks, AstroIntegrationLogger } from 'astro';
 import fs from 'fs/promises';
-import { getTocConfig, SAVE_CONFIG_PATH, INTEGRATION_NAME } from '../config';
+import { getTocConfig, INTEGRATION_NAME } from '../config';
 import { logMessages } from '../log-messages';
 
 export function registerTocIntegration() {
@@ -34,10 +34,9 @@ export function registerTocIntegration() {
 }
 
 async function saveConfigToFile(logger: AstroIntegrationLogger) {
-  logger.info("guardando en.." + SAVE_CONFIG_PATH);
   try {
-    await fs.mkdir(SAVE_CONFIG_PATH, { recursive: true });
-    await fs.writeFile('/.astro/' + "tocconfig.json", JSON.stringify(getTocConfig()));
+    await fs.mkdir(process.cwd()+'/.astro', { recursive: true });
+    await fs.writeFile(process.cwd()+'/.astro/tocconfig.json', JSON.stringify(getTocConfig()));
   } catch (e) {
     logger.warn(logMessages.FAILED_WRITE_CONFIG);
   }
