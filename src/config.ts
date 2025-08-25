@@ -6,12 +6,12 @@ declare global {
 }
 
 export const INTEGRATION_NAME = 'table-of-contents-by-stron';
-export const CONFIG_FILE_PATH = process.cwd() + '/.astro/tocconfig.json';
-
+export const CONFIG_FILE_PATH = '../tocconfig.json';
+export const SAVE_CONFIG_PATH = process.cwd() + "/dist/";
 export let tocConfig: TocConfig = {
     title: 'Table of Contents',
     position: 'right',
-    collapsible: true,
+    collapsible: true
 };
 
 /**
