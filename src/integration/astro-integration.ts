@@ -15,7 +15,7 @@ export const tableOfContents = (config: TocConfig): AstroIntegration => {
         name: INTEGRATION_NAME,
         hooks: {
             'astro:config:setup': registerTocIntegration(),
-            'astro:build:generated': async ({logger, dir}) => {
+            'astro:build:done': async ({logger, dir}) => {
              logger.info('Copying TOC config to dist folder...' + dir.pathname);
               await fs.copyFile(process.cwd()+'/.astro/tocconfig.json', dir.pathname+'tocconfig.json')
           } 
