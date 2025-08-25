@@ -1,6 +1,6 @@
 import type { BaseIntegrationHooks, AstroIntegrationLogger } from 'astro';
 import fs from 'fs/promises';
-import { getTocConfig, INTEGRATION_NAME } from '../config';
+import { getTocConfig, INTEGRATION_NAME, OUTPUT_DIRS } from '../config';
 import { logMessages } from '../log-messages';
 
 export function registerTocIntegration() {
@@ -11,7 +11,11 @@ export function registerTocIntegration() {
     logger,
   }: Parameters<BaseIntegrationHooks['astro:config:setup']>[0]) => {
     if (command === 'preview') return;
+      
+    OUTPUT_DIRS.server = config.build.server.pathname;
+    OUTPUT_DIRS.public = config.build.client.pathname;
 
+    console.log(config);
     logger.info(logMessages.REGISTERING_INTEGRATION);
 
     if (!config.integrations.some((integration) => integration.name === INTEGRATION_NAME)) {

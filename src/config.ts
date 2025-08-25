@@ -6,7 +6,11 @@ declare global {
 }
 
 export const INTEGRATION_NAME = 'table-of-contents-by-stron';
-export const CONFIG_FILE_PATH = '../tocconfig.json';
+export const OUTPUT_DIRS = {
+  server: "",
+  public: ""
+}
+export const CONFIG_FILE_PATH = './tocconfig.json';
 export let tocConfig: TocConfig = {
     title: 'Table of Contents',
     position: 'right',
