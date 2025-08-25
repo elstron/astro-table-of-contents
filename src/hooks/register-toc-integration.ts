@@ -15,7 +15,6 @@ export function registerTocIntegration() {
     OUTPUT_DIRS.server = config.build.server.pathname;
     OUTPUT_DIRS.public = config.build.client.pathname;
 
-    console.log(config);
     logger.info(logMessages.REGISTERING_INTEGRATION);
 
     if (!config.integrations.some((integration) => integration.name === INTEGRATION_NAME)) {
