@@ -4,3 +4,5 @@ test-results/
 coverage/
 .vscode/
 *.log
+.astro/
+*.tgz
