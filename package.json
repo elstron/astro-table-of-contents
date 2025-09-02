@@ -1,10 +1,14 @@
 {
     "name": "astro-table-of-contents",
-    "version": "1.0.13",
+    "version": "1.0.15",
     "description": "Toc integration for Astro projects, providing a simple way to generate and display a table of contents for your content. Supports both static and dynamic content.",
-    "main": "./src/index.ts",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "type": "module",
     "scripts": {
+        "build": "node build.mjs",
+        "dev": "node build.mjs && tsc --watch --emitDeclarationOnly",
+        "prepublishOnly": "npm run build",
         "test": "vitest",
         "test:ui": "vitest --ui",
         "test:run": "vitest run",
@@ -15,9 +19,24 @@
         "format:check": "prettier --check ."
     },
     "exports": {
-        ".": "./src/index.ts",
-        "./component": "./astro/TableOfContents.astro",
-        "./middleware": "./src/middleware/toc-middleware.ts"
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.js",
+            "default": "./dist/index.js"
+        },
+        "./component": {
+            "types": "./astro/TableOfContents.astro",
+            "import": "./astro/TableOfContents.astro",
+            "require": "./astro/TableOfContents.astro",
+            "default": "./astro/TableOfContents.astro"
+        },
+        "./middleware": {
+            "types": "./dist/middleware/toc-middleware.d.ts",
+            "import": "./dist/middleware/toc-middleware.js",
+            "require": "./dist/middleware/toc-middleware.js",
+            "default": "./dist/middleware/toc-middleware.js"
+        }
     },
     "keywords": [
         "astro-component",
@@ -38,13 +57,31 @@
     "author": "",
     "license": "MPL-2.0",
     "packageManager": "pnpm@10.12.3",
+    "files": [
+        "dist/",
+        "astro/",
+        "README.md",
+        "LICENCE"
+    ],
     "dependencies": {
         "typescript": "^5.9.2"
     },
+    "peerDependencies": {
+        "astro": "^4.0.0 || ^5.0.0"
+    },
+    "peerDependenciesMeta": {
+        "astro": {
+            "optional": false
+        }
+    },
     "devDependencies": {
+        "@types/node": "^24.3.0",
         "@vitest/ui": "3.2.4",
         "astro": "^5.12.8",
+        "esbuild": "^0.25.9",
         "prettier": "3.6.2",
+        "ttypescript": "^1.5.15",
+        "typescript-transform-paths": "^3.5.5",
         "vitest": "^3.2.4"
     }
 }

@@ -1,11 +1,15 @@
-// Main exports for the TOC integration
+// Main integration export
 export { tableOfContents } from './integration/astro-integration';
-// Template exports
+
+// Export generation utilities
+export { generateToc } from './generator/toc-generator';
+
+// Export templates
 export {
     tocItemTemplate,
     tocContainerTemplate,
-    nestedListTemplate,
+    nestedListTemplate
 } from './templates/html-templates';
 
-// Type exports
-export type { TocOptions, HeadingData, HierarchyResult } from './types/index';
+// Export types
+export type { TocOptions, HeadingData, HierarchyResult } from './types';

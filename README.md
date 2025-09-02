@@ -89,7 +89,7 @@ interface Props {
 ### Manual TOC generation
 
 ```typescript
-import { generateToc } from 'table-of-contents';
+import { generateToc } from 'astro-table-of-contents';
 
 const htmlContent = `
   <h1>Title</h1>

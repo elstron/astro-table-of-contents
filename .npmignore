@@ -1,0 +1,12 @@
+src/
+.tgz
+build.mjs
+fix-imports.mjs
+package-lock.json
+tocconfig.json
+USAGE-EXAMPLES.md
+.gitignore
+.astro/
+test-results/
+node_modules/
+.prettierrc
