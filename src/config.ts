@@ -5,10 +5,16 @@ declare global {
     var __TOC_CONFIG__: TocConfig | undefined;
 }
 
+export const INTEGRATION_NAME = 'table-of-contents-by-stron';
+export const OUTPUT_DIRS = {
+  server: "",
+  public: ""
+}
+export const CONFIG_FILE_PATH = './tocconfig.json';
 export let tocConfig: TocConfig = {
     title: 'Table of Contents',
     position: 'right',
-    collapsible: true,
+    collapsible: true
 };
 
 /**

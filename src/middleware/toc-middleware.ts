@@ -2,11 +2,12 @@
 import type { MiddlewareHandler } from 'astro';
 import { pageContainsToc } from '../_utils';
 import { generateToc } from '../generator/toc-generator';
-import { getTocConfig } from '../config';
+import tocconfig from '../../../.astro/tocconfig.json' assert { type: 'json' };
 
-export const onRequest: MiddlewareHandler = async ({ request }, next) => {
+export const onRequest: MiddlewareHandler = async ({ locals }, next) => {
     const response = await next();
     const html = await response.text();
+    console.log( tocconfig);
 
     if (!pageContainsToc({ content: html })) await next();
 
@@ -21,7 +22,7 @@ export const onRequest: MiddlewareHandler = async ({ request }, next) => {
         (match, content) => {
             const clean = content.replace(/<[^>]*>/g, '').trim();
             return clean.length === 0
-                ? match.replace(/>[\s\S]*?<\/h2>/, `>${getTocConfig().title}</h2>`)
+                ? match.replace(/>[\s\S]*?<\/h2>/, `>${tocconfig.title}</h2>`)
                 : match;
         },
     );
