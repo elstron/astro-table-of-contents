@@ -6,7 +6,7 @@
     "types": "./dist/index.d.ts",
     "type": "module",
     "scripts": {
-        "build": "node build.mjs",
+        "build": "node build.mjs && npm pack && mv *.tgz ../",
         "dev": "node build.mjs && tsc --watch --emitDeclarationOnly",
         "prepublishOnly": "npm run build",
         "test": "vitest",

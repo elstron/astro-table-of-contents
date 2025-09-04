@@ -1,14 +1,14 @@
 // Astro middleware for TOC processing
 import type { MiddlewareHandler } from 'astro';
-import { pageContainsToc } from '../_utils';
+import { pageContainsToc, isValidRoute } from '../_utils';
 import { generateToc } from '../generator/toc-generator';
 import { getTocConfig } from '../config';
 
-export const onRequest: MiddlewareHandler = async ({ request }, next) => {
+export const onRequest: MiddlewareHandler = async ({ originPathname }, next) => {
     const response = await next();
     const html = await response.text();
 
-    if (!pageContainsToc({ content: html })) await next();
+    if (!isValidRoute(originPathname) || !pageContainsToc({ content: html })) await next();
 
     const toc = generateToc({ content: html });
 

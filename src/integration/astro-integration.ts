@@ -3,8 +3,7 @@
 import type { AstroIntegration } from 'astro';
 import type { TocConfig } from '../types';
 import { registerTocIntegration } from '../hooks/register-toc-integration';
-import { processHtmlFilesForToc } from '../hooks/process-html-files-for-toc';
-import { updateTocConfig, getTocConfig } from '../config';
+import { updateTocConfig } from '../config';
 
 /**
  * Astro integration for automatic table of contents generation
