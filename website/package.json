@@ -1,0 +1,17 @@
+{
+  "name": "documentation-website",
+  "version": "1.0.0",
+  "description": "A simple documentation website built with vanilla JavaScript.",
+  "main": "src/js/main.js",
+  "scripts": {
+    "start": "live-server src"
+  },
+  "keywords": [
+    "documentation",
+    "website",
+    "vanilla",
+    "javascript"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

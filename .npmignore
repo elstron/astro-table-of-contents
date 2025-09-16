@@ -10,3 +10,4 @@ USAGE-EXAMPLES.md
 test-results/
 node_modules/
 .prettierrc
+website/

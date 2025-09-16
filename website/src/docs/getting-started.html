@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Astro Table of Contents</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <h1 style="text-align: center;">Getting Started</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
+                <li><a href="api-reference.html">API Reference</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <h2>🚀 Quick Start Guide</h2>
+            <p>Get up and running with Astro Table of Contents in just a few minutes. This guide will walk you through the installation, configuration, and basic usage.</p>
+        </section>
+
+        <section class="installation">
+            <h2>📦 Installation</h2>
+            <p>Install the package using your preferred package manager:</p>
+            
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="npm">npm</button>
+                    <button class="tab-button" data-tab="pnpm">pnpm</button>
+                    <button class="tab-button" data-tab="yarn">yarn</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="npm">
+                        <pre><code>npm i astro-table-of-contents</code></pre>
+                    </div>
+                    <div class="tab-pane" id="pnpm">
+                        <pre><code>pnpm add astro-table-of-contents</code></pre>
+                    </div>
+                    <div class="tab-pane" id="yarn">
+                        <pre><code>yarn add astro-table-of-contents</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="configuration">
+            <h2>⚙️ Configuration</h2>
+            
+            <article>
+                <h3>1. Configure the Integration</h3>
+                <p>Add the table of contents integration to your <code>astro.config.mjs</code> file:</p>
+                
+                <pre><code>import { defineConfig } from 'astro/config';
+import { tableOfContents } from 'astro-table-of-contents';
+
+export default defineConfig({
+    integrations: [
+        tableOfContents({
+            title: 'Table of Contents', // Custom title
+        }),
+    ],
+});</code></pre>
+            </article>
+
+            <article>
+                <h3>2. Configuration Options</h3>
+                <div class="config-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>title</code></td>
+                                <td>string</td>
+                                <td>'Table of Contents'</td>
+                                <td>Default title for the TOC</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article>
+                <h3>⚠️ SSR Important Note</h3>
+                <div class="issue">
+                    <h4>Configuration Title Limitations</h4>
+                    <p><strong>Important:</strong> The <code>title</code> configured in <code>astro.config.mjs</code> may not work properly in SSR mode (server-rendered pages). For pages with <code>output: "server"</code> or hybrid mode, you should pass a custom title directly to the component:</p>
+                    <pre><code>&lt;TableOfContents title="My Custom Title" /&gt;</code></pre>
+                    <p>If no title is provided via props, the component will use the default "Table of Contents" regardless of the configuration.</p>
+                    <p><strong>🔧 Work in Progress:</strong> We are actively working on improving SSR compatibility to make global configuration work seamlessly across all Astro rendering modes in future releases.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="usage">
+            <h2>🛠️ Basic Usage</h2>
+            
+            <article>
+                <h3>Using the TableOfContents Component</h3>
+                <p>Import and use the component in your Astro pages:</p>
+                
+                <pre><code>---
+// In your .astro file
+import TableOfContents from 'astro-table-of-contents/component';
+---
+
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Page with TOC&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;main&gt;
+      &lt;TableOfContents 
+        title="Page Contents" 
+        backgroundColor="#f8f9fa"
+        class="my-toc" 
+      /&gt;
+      
+      &lt;h1&gt;Main Title&lt;/h1&gt;
+      &lt;p&gt;Content goes here...&lt;/p&gt;
+
+      &lt;h2&gt;Section 1&lt;/h2&gt;
+      &lt;p&gt;More content...&lt;/p&gt;
+
+      &lt;h3&gt;Subsection 1.1&lt;/h3&gt;
+      &lt;p&gt;Nested content...&lt;/p&gt;
+
+      &lt;h2&gt;Section 2&lt;/h2&gt;
+      &lt;p&gt;Final content...&lt;/p&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>Component Props</h3>
+                <p>The TableOfContents component accepts the following props:</p>
+                
+                <ul class="props-list">
+                    <li><strong>title</strong> (string, optional): Custom title for this specific TOC instance</li>
+                    <li><strong>backgroundColor</strong> (string, optional): Custom background color (CSS color value)</li>
+                    <li><strong>class</strong> (string, optional): Additional CSS classes for styling</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="advanced">
+            <h2>🔧 Advanced Usage</h2>
+            
+            <article>
+                <h3>Manual TOC Generation</h3>
+                <p>You can also generate TOC programmatically using the utility functions:</p>
+                
+                <pre><code>import { generateToc } from 'astro-table-of-contents';
+
+const htmlContent = `
+  &lt;h1&gt;Chapter 1: Introduction&lt;/h1&gt;
+  &lt;h2&gt;1.1 Overview&lt;/h2&gt;
+  &lt;h3&gt;1.1.1 Background&lt;/h3&gt;
+  &lt;h2&gt;1.2 Objectives&lt;/h2&gt;
+`;
+
+const tocOptions = {
+  content: htmlContent
+};
+
+const tocHtml = generateToc(tocOptions);
+console.log(tocHtml);</code></pre>
+            </article>
+
+            <article>
+                <h3>Custom Styling</h3>
+                <p>Override the default styles by targeting the component classes:</p>
+                
+                <pre><code>/* Custom TOC styling */
+stron-toc {
+  border: 2px solid #e2e8f0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+stron-toc h2 {
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+stron-toc a {
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+stron-toc a:hover {
+  color: #fff;
+  padding-left: 0.5rem;
+}</code></pre>
+            </article>
+        </section>
+
+        <section class="troubleshooting">
+            <h2>🔍 Troubleshooting</h2>
+            
+            <article>
+                <h3>Common Issues</h3>
+
+                <div class="issue">
+                    <h4>Custom title from config not working in SSR</h4>
+                    <p><strong>Solution:</strong> In SSR mode (server-rendered pages), the title from <code>astro.config.mjs</code> may not be available. Always pass the title as a prop: <code>&lt;TableOfContents title="My Title" /&gt;</code></p>
+                    <p><strong>🚀 Future Update:</strong> This limitation is being addressed and will be resolved in upcoming versions to provide better SSR support.</p>
+                </div>
+                
+                <div class="issue">
+                    <h4>Styling conflicts</h4>
+                    <p><strong>Solution:</strong> Use more specific CSS selectors or the <code>class</code> prop to avoid conflicts with existing styles.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="next-steps">
+            <h2>🎯 Next Steps</h2>
+            <div class="next-grid">
+                <div class="next-card">
+                    <h3>📚 API Reference</h3>
+                    <p>Explore the complete API documentation with all available methods and configuration options.</p>
+                    <a href="api-reference.html" class="btn btn-primary">View API Docs</a>
+                </div>
+                <div class="next-card">
+                    <h3>🌐 Live Demo</h3>
+                    <p>See the table of contents in action with our interactive demo website.</p>
+                    <a href="https://toc-cloudflare-test.pages.dev/" class="btn btn-secondary" target="_blank">View Demo</a>
+                </div>
+                <div class="next-card">
+                    <h3>💡 Examples</h3>
+                    <p>Check out the GitHub repository for more examples and advanced use cases.</p>
+                    <a href="https://github.com/elstron/astro-table-of-contents" class="btn btn-secondary" target="_blank">GitHub Repo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Astro Table of Contents Project</p>
+    </footer>
+    <script src="../js/main.js"></script>
+</body>
+</html>

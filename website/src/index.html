@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Table of Contents - Automatic TOC Generation for Astro</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="description" content="A complete integration for Astro that automatically generates table of contents (TOC) for your web pages. Seamless integration with Astro projects.">
+</head>
+<body>
+    <header>
+        <div class="hero">
+            <h1>🚀 Astro Table of Contents</h1>
+            <p class="hero-subtitle">Automatic TOC generation for your Astro projects</p>
+            <div class="hero-buttons">
+                <a href="docs/getting-started.html" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/elstron/astro-table-of-contents" class="btn btn-secondary" target="_blank">GitHub</a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="docs/getting-started.html">Getting Started</a></li>
+                <li><a href="docs/api-reference.html">API Reference</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="features">
+            <h2>✨ Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🔄 Automatic Generation</h3>
+                    <p>Automatically detects headings (h1, h2, h3, etc.) in your HTML content and generates a structured table of contents.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Native Astro Integration</h3>
+                    <p>Seamlessly integrates with Astro's integration system. No complex setup required.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎨 Highly Customizable</h3>
+                    <p>Configure title, position, colors, depth levels, and styling to match your project's design.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="demo">
+            <h2>📖 Quick Example</h2>
+            <div class="code-example">
+                <div class="code-block">
+                    <h4>1. Install the package</h4>
+                    <pre><code>npm i astro-table-of-contents</code></pre>
+                </div>
+                <div class="code-block">
+                    <h4>2. Configure in astro.config.mjs</h4>
+                    <pre><code>import { defineConfig } from 'astro/config';
+import { tableOfContents } from 'astro-table-of-contents';
+
+export default defineConfig({
+    integrations: [
+        tableOfContents({
+            title: 'Contents',
+        }),
+    ],
+});</code></pre>
+                </div>
+                <div class="code-block">
+                    <h4>3. Use the component</h4>
+                    <pre><code>---
+import TableOfContents from 'astro-table-of-contents/component';
+---
+
+&lt;TableOfContents title="Page Contents" /&gt;
+
+&lt;h1&gt;Main Title&lt;/h1&gt;
+&lt;h2&gt;Section 1&lt;/h2&gt;
+&lt;h3&gt;Subsection 1.1&lt;/h3&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <h2>📊 Project Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span id="current-version" class="stat-number">v1.0.16</span>
+                    <span class="stat-label">Latest Version</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">TypeScript</span>
+                    <span class="stat-label">Fully Typed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Astro 4+</span>
+                    <span class="stat-label">Compatible</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="getting-started">
+            <h2>🚀 Ready to Get Started?</h2>
+            <p>Follow our comprehensive guide to integrate table of contents into your Astro project in minutes.</p>
+            <div class="cta-buttons">
+                <a href="docs/getting-started.html" class="btn btn-primary">View Documentation</a>
+                <a href="https://toc-cloudflare-test.pages.dev/" class="btn btn-secondary" target="_blank">Live Demo</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Astro Table of Contents - Built with ❤️ by Stron for the Astro community</p>
+            <div class="footer-links">
+                <a href="https://github.com/elstron/astro-table-of-contents" target="_blank">GitHub</a>
+                <a href="https://www.npmjs.com/package/astro-table-of-contents" target="_blank">NPM</a>
+                <a href="https://toc-cloudflare-test.pages.dev/" target="_blank">Demo</a>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

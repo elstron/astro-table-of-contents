@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference - Astro Table of Contents</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <h1 style="text-align: center;">API Reference</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
+                <li><a href="api-reference.html">API Reference</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="overview">
+            <h2>📚 API Overview</h2>
+            <p>Complete reference for the Astro Table of Contents integration. This page covers all available functions, components, types, and configuration options.</p>
+        </section>
+
+        <section class="integration">
+            <h2>🔧 Integration API</h2>
+            
+            <article>
+                <h3>tableOfContents(config)</h3>
+                <p>Main integration function that configures the table of contents for your Astro project.</p>
+                
+                <h4>Parameters</h4>
+                <div class="param-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>config</code></td>
+                                <td>TocConfig</td>
+                                <td>No</td>
+                                <td>Configuration object for the TOC integration</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>Returns</h4>
+                <p><code>AstroIntegration</code> - Astro integration object</p>
+                
+                <h4>Example</h4>
+                <pre><code>import { defineConfig } from 'astro/config';
+import { tableOfContents } from 'astro-table-of-contents';
+
+export default defineConfig({
+    integrations: [
+        tableOfContents({
+            title: 'Table of Contents',
+        }),
+    ],
+});</code></pre>
+            </article>
+        </section>
+
+        <section class="component">
+            <h2>🧩 TableOfContents Component</h2>
+            
+            <article>
+                <h3>&lt;TableOfContents /&gt;</h3>
+                <p>Astro component that renders an interactive table of contents based on headings in your content.</p>
+                
+                <h4>Props</h4>
+                <div class="prop-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Prop</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>title</code></td>
+                                <td>string</td>
+                                <td>undefined</td>
+                                <td>Custom title for this TOC instance</td>
+                            </tr>
+                            <tr>
+                                <td><code>backgroundColor</code></td>
+                                <td>string</td>
+                                <td>'transparent'</td>
+                                <td>Custom background color (CSS color value)</td>
+                            </tr>
+                            <tr>
+                                <td><code>class</code></td>
+                                <td>string</td>
+                                <td>undefined</td>
+                                <td>Additional CSS classes for styling</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>Usage Example</h4>
+                <pre><code>---
+import TableOfContents from 'astro-table-of-contents/component';
+---
+
+&lt;TableOfContents 
+  title="Page Contents"
+  backgroundColor="#f8f9fa"
+  class="custom-toc"
+/&gt;</code></pre>
+
+                <h4>⚠️ SSR Considerations</h4>
+                <div class="issue">
+                    <h4>Title Prop in SSR Mode</h4>
+                    <p><strong>Important:</strong> When using Astro in SSR mode (<code>output: "server"</code>) or hybrid mode, the global title configuration from <code>astro.config.mjs</code> may not be accessible. In these cases, you must provide the <code>title</code> prop directly to the component.</p>
+                    <pre><code>// ✅ Recommended for SSR
+&lt;TableOfContents title="My Custom Title" /&gt;
+
+// ❌ May not work in SSR (relies on config)
+&lt;TableOfContents /&gt; // Will fallback to "Table of Contents"</code></pre>
+                    <p><strong>🔧 Development Note:</strong> We are actively working on enhancing SSR compatibility to make global configuration accessible across all Astro rendering modes in future releases.</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="generator">
+            <h2>🔄 Generator Functions</h2>
+            
+            <article>
+                <h3>generateToc(options)</h3>
+                <p>Programmatically generates table of contents HTML from content.</p>
+                
+                <h4>Parameters</h4>
+                <div class="param-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>options</code></td>
+                                <td>TocOptions</td>
+                                <td>Yes</td>
+                                <td>Options object containing content to parse</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>Returns</h4>
+                <p><code>string</code> - Generated HTML for the table of contents</p>
+                
+                <h4>Example</h4>
+                <pre><code>import { generateToc } from 'astro-table-of-contents';
+
+const htmlContent = `
+  &lt;h1&gt;Introduction&lt;/h1&gt;
+  &lt;h2&gt;Getting Started&lt;/h2&gt;
+  &lt;h3&gt;Installation&lt;/h3&gt;
+  &lt;h3&gt;Configuration&lt;/h3&gt;
+  &lt;h2&gt;Advanced Usage&lt;/h2&gt;
+`;
+
+const tocHtml = generateToc({ content: htmlContent });
+console.log(tocHtml);</code></pre>
+            </article>
+
+            <article>
+                <h3>buildHierarchy(headings, startIndex?, currentLevel?)</h3>
+                <p>Builds hierarchical HTML structure from parsed heading data.</p>
+                
+                <h4>Parameters</h4>
+                <div class="param-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>headings</code></td>
+                                <td>HeadingData[]</td>
+                                <td>-</td>
+                                <td>Array of parsed heading objects</td>
+                            </tr>
+                            <tr>
+                                <td><code>startIndex</code></td>
+                                <td>number</td>
+                                <td>0</td>
+                                <td>Starting index in headings array</td>
+                            </tr>
+                            <tr>
+                                <td><code>currentLevel</code></td>
+                                <td>number</td>
+                                <td>1</td>
+                                <td>Current heading level for hierarchy</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>Returns</h4>
+                <p><code>HierarchyResult</code> - Object with generated HTML and next index</p>
+            </article>
+        </section>
+
+        <section class="parser">
+            <h2>🔍 Parser Functions</h2>
+            
+            <article>
+                <h3>parseHeadings(content)</h3>
+                <p>Extracts heading information from HTML content.</p>
+                
+                <h4>Parameters</h4>
+                <div class="param-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>content</code></td>
+                                <td>string</td>
+                                <td>Yes</td>
+                                <td>HTML content to parse for headings</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>Returns</h4>
+                <p><code>HeadingData[]</code> - Array of heading objects with level, title, and id</p>
+            </article>
+        </section>
+
+        <section class="types">
+            <h2>📋 Type Definitions</h2>
+            
+            <article>
+                <h3>TocConfig</h3>
+                <p>Configuration interface for the table of contents integration.</p>
+                
+                <pre><code>interface TocConfig {
+    title?: string;           // Default title for TOC
+}</code></pre>
+            </article>
+
+            <article>
+                <h3>TocOptions</h3>
+                <p>Options for manual TOC generation.</p>
+                
+                <pre><code>interface TocOptions {
+    content: string;          // HTML content to parse
+}</code></pre>
+            </article>
+
+            <article>
+                <h3>HeadingData</h3>
+                <p>Structure representing a parsed heading.</p>
+                
+                <pre><code>interface HeadingData {
+    level: number;            // Heading level (1-6)
+    title: string;            // Text content of heading
+    id: string;               // Generated or existing ID attribute
+}</code></pre>
+            </article>
+
+            <article>
+                <h3>HierarchyResult</h3>
+                <p>Return type for hierarchy building functions.</p>
+                
+                <pre><code>interface HierarchyResult {
+    html: string;             // Generated HTML string
+    nextIndex: number;        // Next index to process
+}</code></pre>
+            </article>
+        </section>
+
+        <section class="templates">
+            <h2>🎨 HTML Templates</h2>
+            
+            <article>
+                <h3>Template Functions</h3>
+                <p>Functions that generate HTML structures for the table of contents.</p>
+                
+                <h4>tocContainerTemplate(content)</h4>
+                <p>Wraps TOC content in the main container structure.</p>
+                
+                <h4>nestedListTemplate(content)</h4>
+                <p>Creates nested list structure for hierarchical content.</p>
+                
+                <h4>tocItemTemplate(id, title)</h4>
+                <p>Generates individual TOC item HTML.</p>
+                
+                <h4>Example Usage</h4>
+                <pre><code>import { 
+    tocContainerTemplate, 
+    nestedListTemplate, 
+    tocItemTemplate 
+} from 'astro-table-of-contents';
+
+const item = tocItemTemplate('intro', 'Introduction');
+const list = nestedListTemplate(item);
+const container = tocContainerTemplate(list);</code></pre>
+            </article>
+        </section>
+
+        <section class="css-classes">
+            <h2>🎨 CSS Classes</h2>
+            <p>Default CSS classes applied to the table of contents for styling customization.</p>
+            
+            <article>
+                <h3>Component Classes</h3>
+                <div class="css-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Element</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>stron-toc</code></td>
+                                <td>Main container</td>
+                                <td>Root element of the TOC component</td>
+                            </tr>
+                            <tr>
+                                <td><code>#toc-title</code></td>
+                                <td>Title element</td>
+                                <td>Clickable title that toggles collapse</td>
+                            </tr>
+                            <tr>
+                                <td><code>collapsed</code></td>
+                                <td>Main container</td>
+                                <td>Applied when TOC is collapsed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4>Example Custom Styling</h4>
+                <pre><code>/* Custom TOC styling */
+stron-toc {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+stron-toc #toc-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    margin: -1rem -1rem 1rem -1rem;
+}
+
+stron-toc a {
+    color: #4a5568;
+    font-weight: 500;
+}
+
+stron-toc a:hover {
+    color: #667eea;
+    text-decoration: underline;
+}</code></pre>
+            </article>
+        </section>
+
+        <section class="middleware">
+            <h2>🔄 Middleware API</h2>
+            
+            <article>
+                <h3>TOC Middleware</h3>
+                <p>Automatic processing middleware that runs during the Astro build process.</p>
+                
+                <h4>processHtmlFilesForToc()</h4>
+                <p>Processes HTML files and injects TOC where appropriate.</p>
+                
+                <h4>Features</h4>
+                <ul>
+                    <li>Automatic heading detection and ID generation</li>
+                    <li>Smart TOC placement based on content structure</li>
+                    <li>Integration with Astro's build pipeline</li>
+                    <li>Configurable through integration options</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="exports">
+            <h2>📦 Package Exports</h2>
+            
+            <article>
+                <h3>Main Exports</h3>
+                <pre><code>// Main integration
+import { tableOfContents } from 'astro-table-of-contents';
+
+// Component
+import TableOfContents from 'astro-table-of-contents/component';
+
+// Middleware (for advanced usage)
+import { tocMiddleware } from 'astro-table-of-contents/middleware';</code></pre>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Astro Table of Contents Project</p>
+    </footer>
+    <script src="../js/main.js"></script>
+</body>
+</html>
