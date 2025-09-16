@@ -1,18 +1,35 @@
-document.addEventListener('DOMContentLoaded', function() {
+const PACKAGE_NAME = 'astro-table-of-contents';
+
+document.addEventListener('DOMContentLoaded', async () => {
     initializeTabs();
     initializeSmoothScroll();
     initializeCodeCopy();
     initializeInteractiveElements();
-    displayVersion();
+    await displayVersion();
+    await displayLastMonthDownloads()
 });
 
 
 async function getCurrentVersion() {
-    const response = await fetch('https://registry.npmjs.org/astro-table-of-contents');
+    const response = await fetch(`https://registry.npmjs.org/${PACKAGE_NAME}`);
     const data = await response.json();
     return data['dist-tags'] ? data['dist-tags'].latest : 'unknown';
 }
 
+
+async function lastMonthDownloads() {
+    const response = await fetch(`https://api.npmjs.org/downloads/point/last-month/${PACKAGE_NAME}`);
+    const data = await response.json();
+    return data.downloads || 0;
+}
+
+async function displayLastMonthDownloads() {
+    const downloadsElement = document.querySelector("#downloads")
+    const downloads = await lastMonthDownloads()
+    
+    downloadsElement.textContent = downloads
+
+}   
 
 async function displayVersion() {
     const currentVersion = await getCurrentVersion()
