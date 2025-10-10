@@ -1,3 +1,5 @@
+<img width="912" height="341" alt="screenshot_1760122902" src="https://github.com/user-attachments/assets/1ec2937d-2973-45ac-acdc-a31e0c88bcc4" />
+
 # Astro Table of Contents
 
 A complete integration for Astro that automatically generates table of contents (TOC) for your web pages. This package provides an elegant and customizable solution to improve content navigation in your Astro projects.
