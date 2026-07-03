@@ -2,7 +2,9 @@
 import type { MiddlewareHandler } from 'astro';
 import { isValidPage, pageContainsToc } from '../_utils';
 import { generateToc } from '../generator/toc-generator';
-import { getTocConfig } from '../config';
+
+// @ts-ignore
+import config from 'virtual:astro-toc';
 
 export const onRequest: MiddlewareHandler = async ({ originPathname }, next) => {
     const response = await next();
@@ -22,7 +24,7 @@ export const onRequest: MiddlewareHandler = async ({ originPathname }, next) => 
         (match, content) => {
             const clean = content.replace(/<[^>]*>/g, '').trim();
             return clean.length === 0
-                ? match.replace(/>[\s\S]*?<\/h2>/, `>${getTocConfig().title}</h2>`)
+                ? match.replace(/>[\s\S]*?<\/h2>/, `>${config.title}</h2>`)
                 : match;
         },
     );

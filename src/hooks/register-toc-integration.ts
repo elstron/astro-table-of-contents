@@ -1,9 +1,10 @@
 import type { BaseIntegrationHooks } from 'astro';
-import { fileURLToPath } from 'url';
-const path = await import('path');
-export function registerTocIntegration() {
+import { TocConfig } from '../types';
+
+export function registerTocIntegration(tocConfig: TocConfig) {
     return async ({
         config,
+        updateConfig,
         addMiddleware,
         command,
         logger,
@@ -22,10 +23,27 @@ export function registerTocIntegration() {
         logger.info('Registering Table of Contents integration');
         logger.info('Adding TOC...');
 
-        
+        updateConfig({
+            vite: {
+                plugins: [
+                    {
+                        name: 'virtual-astro-toc',
+                        resolveId(id) {
+                            if (id === 'virtual:astro-toc') return 'virtual:astro-toc';
+                        },
+                        load(id) {
+                            if (id === 'virtual:astro-toc') {
+                                return `export default ${JSON.stringify(tocConfig)};`;
+                            }
+                        },
+                    },
+                ],
+            },
+        });
+
         addMiddleware({
             order: 'pre',
-            entrypoint: new URL('../middleware/toc-middleware.js', import.meta.url)
+            entrypoint: new URL('../middleware/toc-middleware.js', import.meta.url),
         });
     };
 }

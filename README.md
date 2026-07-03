@@ -4,7 +4,7 @@
 
 A complete integration for Astro that automatically generates table of contents (TOC) for your web pages. This package provides an elegant and customizable solution to improve content navigation in your Astro projects.
 
-live example: [astro-toc-example](https://toc-cloudflare-test.pages.dev/)
+live example: [astro-toc-example](https://example-cf-toc.stron.dev/)
 
 ## 🚀 Features
 

@@ -14,7 +14,7 @@ export const tableOfContents = (config: TocConfig): AstroIntegration => {
     return {
         name: 'table-of-contents-by-stron',
         hooks: {
-            'astro:config:setup': registerTocIntegration(),
+            'astro:config:setup': registerTocIntegration(config),
         },
     };
 };

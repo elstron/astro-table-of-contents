@@ -1,6 +1,6 @@
 {
     "name": "astro-table-of-contents",
-    "version": "1.0.16",
+    "version": "1.0.17-beta.0",
     "description": "Toc integration for Astro projects, providing a simple way to generate and display a table of contents for your content. Supports both static and dynamic content.",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -67,7 +67,7 @@
         "typescript": "^5.9.2"
     },
     "peerDependencies": {
-        "astro": "^4.0.0 || ^5.0.0"
+        "astro": "^7.0.6"
     },
     "peerDependenciesMeta": {
         "astro": {
@@ -75,9 +75,9 @@
         }
     },
     "devDependencies": {
+        "astro": "^7.0.6",
         "@types/node": "^24.3.0",
         "@vitest/ui": "3.2.4",
-        "astro": "^5.12.8",
         "esbuild": "^0.25.9",
         "prettier": "3.6.2",
         "ttypescript": "^1.5.15",
