@@ -76,7 +76,7 @@ describe('processHtmlFilesForToc', () => {
         await processor({
             dir: mockDir,
             logger: mockLogger,
-            experimentalRouteToHeaders: mockExperimentalRouteToHeaders,
+            routeToHeaders: mockExperimentalRouteToHeaders,
         });
 
         expect(mockFs.readdir).toHaveBeenCalledWith('/output/dist', { recursive: true });
@@ -135,7 +135,7 @@ describe('processHtmlFilesForToc', () => {
         await processor({
             dir: mockDir,
             logger: mockLogger,
-            experimentalRouteToHeaders: mockExperimentalRouteToHeaders,
+            routeToHeaders: mockExperimentalRouteToHeaders,
         });
 
         expect(mockFs.readdir).toHaveBeenCalledWith('/output/dist', { recursive: true });
@@ -180,7 +180,7 @@ describe('processHtmlFilesForToc', () => {
         await processor({
             dir: mockDir,
             logger: mockLogger,
-            experimentalRouteToHeaders: mockExperimentalRouteToHeaders,
+            routeToHeaders: mockExperimentalRouteToHeaders,
         });
 
         expect(mockFs.readFile).toHaveBeenCalledTimes(2);
@@ -213,7 +213,7 @@ describe('processHtmlFilesForToc', () => {
         await processor({
             dir: mockDir,
             logger: mockLogger,
-            experimentalRouteToHeaders: mockExperimentalRouteToHeaders,
+            routeToHeaders: mockExperimentalRouteToHeaders,
         });
 
         expect(mockFs.readdir).toHaveBeenCalledWith('/output/dist', { recursive: true });
@@ -232,7 +232,7 @@ describe('processHtmlFilesForToc', () => {
         await processor({
             dir: mockDir,
             logger: mockLogger,
-            experimentalRouteToHeaders: mockExperimentalRouteToHeaders,
+            routeToHeaders: mockExperimentalRouteToHeaders,
         });
 
         expect(mockFs.readdir).toHaveBeenCalledWith('/output/dist', { recursive: true });
@@ -265,7 +265,7 @@ describe('processHtmlFilesForToc', () => {
         await processor({
             dir: mockDir,
             logger: mockLogger,
-            experimentalRouteToHeaders: mockExperimentalRouteToHeaders,
+            routeToHeaders: mockExperimentalRouteToHeaders,
         });
 
         const expectedUpdatedContent = mockHtmlContent.replace(
