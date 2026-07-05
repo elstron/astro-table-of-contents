@@ -8,6 +8,8 @@ export interface HeadingData {
     level: number;
     title: string;
     id: string;
+    parentIndex?: number | null;
+    indexId?: number;
 }
 
 export interface HierarchyResult {
@@ -17,6 +19,7 @@ export interface HierarchyResult {
 
 export interface TocConfig {
     title?: string;
+    showIndex?: boolean;
     position?: 'left' | 'right';
     collapsible?: boolean;
     maxDepth?: number;

@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { generateToc, buildHierarchy } from './toc-generator';
+import { generateToc, buildHtmlHierarchy } from './toc-generator';
 import { tocContainerTemplate } from '../templates/html-templates';
+import { createHierarchy } from '../parser/heading-parser';
 
 describe('generateToc', () => {
     it('should generate hierarchical HTML TOC from parsed headings', () => {
@@ -14,20 +15,21 @@ describe('generateToc', () => {
 
         const expectedHtml =
             `<ul>` +
-            `<li><a href="#introduction">Introduction</a>` +
+            `<li><a data-index="1" href="#introduction">Introduction</a>` +
             `<ul>` +
-            `<li><a href="#getting-started">Getting Started</a></li>` +
-            `<li><a href="#installation">Installation</a>` +
+            `<li><a data-index="1.1" href="#getting-started">Getting Started</a></li>` +
+            `<li><a data-index="1.2" href="#installation">Installation</a>` +
             `<ul>` +
-            `<li><a href="#using-npm">Using npm</a></li>` +
-            `<li><a href="#using-yarn">Using yarn</a></li>` +
+            `<li><a data-index="1.2.1" href="#using-npm">Using npm</a></li>` +
+            `<li><a data-index="1.2.2" href="#using-yarn">Using yarn</a></li>` +
             `</ul></li>` +
             `</ul></li>` +
             `</ul>`;
 
-        expect(buildHierarchy(headings)).toEqual({
+        const herarchyResult = buildHtmlHierarchy(createHierarchy(headings));
+
+        expect(herarchyResult).toEqual({
             html: expectedHtml,
-            nextIndex: headings.length,
         });
     });
 
@@ -35,9 +37,8 @@ describe('generateToc', () => {
         const headings: any[] = [];
         const expectedHtml = `<ul></ul>`;
 
-        expect(buildHierarchy(headings)).toEqual({
+        expect(buildHtmlHierarchy(headings)).toEqual({
             html: expectedHtml,
-            nextIndex: 0,
         });
     });
 
@@ -55,16 +56,16 @@ describe('generateToc', () => {
 
         let expectedHtml =
             `<ul>` +
-            `<li><a href="#introduction">Introduction</a>` +
+            `<li><a data-index="1" href="#introduction">Introduction</a>` +
             `<ul>` +
-            `<li><a href="#getting-started">Getting Started</a></li>` +
-            `<li><a href="#installation">Installation</a>` +
+            `<li><a data-index="1.1" href="#getting-started">Getting Started</a></li>` +
+            `<li><a data-index="1.2" href="#installation">Installation</a>` +
             `<ul>` +
-            `<li><a href="#using-npm">Using npm</a></li>` +
-            `<li><a href="#using-yarn">Using yarn</a></li>` +
+            `<li><a data-index="1.2.1" href="#using-npm">Using npm</a></li>` +
+            `<li><a data-index="1.2.2" href="#using-yarn">Using yarn</a></li>` +
             `</ul></li>` +
             `</ul></li>` +
-            `<li><a href="#another-introduction">Another Introduction</a></li>` +
+            `<li><a data-index="2" href="#another-introduction">Another Introduction</a></li>` +
             `</ul>`;
 
         expectedHtml = tocContainerTemplate(expectedHtml);
@@ -91,11 +92,11 @@ describe('generateToc', () => {
 
         let expectedHtml =
             `<ul>` +
-            `<li><a href="#introduction-overview">Introduction & Overview</a>` +
+            `<li><a data-index="1" href="#introduction-overview">Introduction & Overview</a>` +
             `<ul>` +
-            `<li><a href="#getting-started-a-guide">Getting Started: A Guide</a>` +
+            `<li><a data-index="1.1" href="#getting-started-a-guide">Getting Started: A Guide</a>` +
             `<ul>` +
-            `<li><a href="#using-npm-yarn">Using npm & yarn</a></li>` +
+            `<li><a data-index="1.1.1" href="#using-npm-yarn">Using npm & yarn</a></li>` +
             `</ul></li>` +
             `</ul></li>` +
             `</ul>`;
