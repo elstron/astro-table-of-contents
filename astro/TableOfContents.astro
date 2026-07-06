@@ -1,13 +1,14 @@
 ---
 interface Props {
-    title?: string;
-    backgroundColor?: string;
-    class?: string;
+  title?: string;
+  showIndex?: boolean;
+  backgroundColor?: string;
+  class?: string;
 }
-const { title, backgroundColor, class:className, ...rest } = Astro.props;
+const { title, backgroundColor, class:className, showIndex, ...rest } = Astro.props;
 ---
 
-<stron-toc class={className} {...rest}>
+<stron-toc class={className} {...rest} data-show-index={showIndex ? 'true' : 'false'}>
     <h2 id="toc-title" style={`background-color: ${backgroundColor || 'transparent'};`}>
         {title || ''}
     </h2>
@@ -54,7 +55,7 @@ const { title, backgroundColor, class:className, ...rest } = Astro.props;
             font-weight: 700;
             &:hover {
                 color: #777777;
-                text-decoration: underline;
+              text-decoration: underline;
             }
         }
         &.collapsed {
@@ -62,17 +63,38 @@ const { title, backgroundColor, class:className, ...rest } = Astro.props;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
+      
     }
+    stron-toc[data-show-index="true"]{ 
+      & a::before {
+          --data-index: attr(data-index);
+          content: var(--data-index);
+          margin-right: 0.5rem;
+          color:currentColor;;
+      }
+    }
+
 </style>
 
 <script>
     const toc = document.querySelector('stron-toc');
-
+    const stronToc = document.querySelector('stron-toc');
     const titleElement = toc?.querySelector('#toc-title');
+
+    const showIndexPreferences = stronToc?.getAttribute('data-show-index');
+    
+    if (!showIndexPreferences) {
+      stronToc?.setAttribute('data-show-index', showIndex() ? 'true' : 'false');
+    }
 
     titleElement?.addEventListener('click', (e) => {
         e.preventDefault();
         toc?.classList.toggle('collapsed');
     });
+
+    function showIndex() {
+      //@ts-ignore
+      return ( typeof tocConfig !== 'undefined' && tocConfig.showIndex === true );
+    }
 
 </script>

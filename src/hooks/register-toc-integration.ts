@@ -6,6 +6,7 @@ export function registerTocIntegration(tocConfig: TocConfig) {
         config,
         updateConfig,
         addMiddleware,
+      injectScript,
         command,
         logger,
     }: Parameters<BaseIntegrationHooks['astro:config:setup']>[0]) => {
@@ -20,6 +21,10 @@ export function registerTocIntegration(tocConfig: TocConfig) {
                 hooks: {},
             });
         }
+
+        injectScript('head-inline', `
+            const tocConfig = { showIndex: ${tocConfig.showIndex} };  
+          `)
         logger.info('Registering Table of Contents integration');
         logger.info('Adding TOC...');
 
