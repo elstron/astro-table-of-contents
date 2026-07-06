@@ -1,14 +1,15 @@
 {
     "name": "astro-table-of-contents",
-    "version": "1.0.17",
+    "version": "1.0.19",
     "description": "Toc integration for Astro projects, providing a simple way to generate and display a table of contents for your content. Supports both static and dynamic content.",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "type": "module",
     "scripts": {
-        "build": "node build.mjs && npm pack && mv *.tgz ../",
+        "build": "node build.mjs && npm pack",
         "dev": "node build.mjs && tsc --watch --emitDeclarationOnly",
-        "prepublishOnly": "npm run build",
+        "publish": "npm publish --access public",
+        "publish:beta": "npm publish --tag beta --access public",
         "test": "vitest",
         "test:ui": "vitest --ui",
         "test:run": "vitest run",

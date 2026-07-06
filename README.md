@@ -4,9 +4,9 @@
 
 A complete integration for Astro that automatically generates table of contents (TOC) for your web pages. This package provides an elegant and customizable solution to improve content navigation in your Astro projects.
 
-live example: [astro-toc-example](https://example-cf-toc.stron.dev/)
+live example: [astro-toc-example](https://example-cf-toc.stron.dev/blog/first-post/)
 
-## 🚀 Features
+## Features
 
 - **Automatic generation**: Automatically detects headings (`h1`, `h2`, `h3`, etc.) in your HTML content
 - **Native Astro integration**: Seamlessly integrates with Astro's integration system
@@ -17,7 +17,7 @@ live example: [astro-toc-example](https://example-cf-toc.stron.dev/)
 - **Integrated middleware**: Automatic processing during build
 - **Responsive**: Adapts to different screen sizes
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm i astro-table-of-contents
@@ -41,6 +41,7 @@ export default defineConfig({
     integrations: [
         tableOfContents({
             title: 'Contents', // default title
+            showIndex: true, // showIndex false by default
         }),
     ],
 });
@@ -74,19 +75,6 @@ import TableOfContents from 'astro-table-of-contents/component';
   </body>
 </html>
 ```
-
-## ⚙️ Configuration
-
-### TableOfContents component props
-
-```typescript
-interface Props {
-    title?: string; // Custom title for this TOC
-    backgroundColor?: string; // Custom background color
-}
-```
-
-## 🔧 Advanced API
 
 ### Manual TOC generation
 
