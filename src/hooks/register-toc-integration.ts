@@ -6,11 +6,14 @@ export function registerTocIntegration(tocConfig: TocConfig) {
         config,
         updateConfig,
         addMiddleware,
-      injectScript,
+        injectScript,
         command,
         logger,
     }: Parameters<BaseIntegrationHooks['astro:config:setup']>[0]) => {
         if (command === 'preview') return;
+
+        logger.info('Registering Table of Contents integration');
+
         if (
             !config.integrations.some(
                 (integration) => integration.name === 'table-of-contents-by-stron',
@@ -22,11 +25,13 @@ export function registerTocIntegration(tocConfig: TocConfig) {
             });
         }
 
-        injectScript('head-inline', `
-            const tocConfig = { showIndex: ${tocConfig.showIndex} };  
-          `)
-        logger.info('Registering Table of Contents integration');
-        logger.info('Adding TOC...');
+        logger.info('Injecting TOC configuration...');
+        injectScript(
+            'head-inline',
+            `
+            const tocConfig = { showIndex: ${tocConfig?.showIndex ?? false} };  
+          `,
+        );
 
         updateConfig({
             vite: {
@@ -45,6 +50,8 @@ export function registerTocIntegration(tocConfig: TocConfig) {
                 ],
             },
         });
+
+        logger.info('Adding TOC...');
 
         addMiddleware({
             order: 'pre',
